@@ -1,0 +1,12 @@
+version: '2'
+services:
+    jhgrad-postgresql:
+        container_name: jhgrad-postgresql
+        image: postgres:9.5.4
+        # volumes:
+        #     - ~/volumes/jhipster/jhgrad/postgresql/:/var/lib/postgresql/
+        environment:
+            - POSTGRES_USER=jhgrad
+            - POSTGRES_PASSWORD=
+        ports:
+            - 5432:5432
