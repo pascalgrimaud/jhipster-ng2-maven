@@ -88,7 +88,7 @@
         <sortpom-maven-plugin.version>2.5.0</sortpom-maven-plugin.version>
         <!-- Spring properties -->
         <springfox.version>2.6.1</springfox.version>
-        <yarn.version>v0.19.1</yarn.version>
+        <yarn.version>v0.20.3</yarn.version>
     </properties>
 
 

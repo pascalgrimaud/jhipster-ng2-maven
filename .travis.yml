@@ -30,6 +30,7 @@ before_install:
 install:
   - yarn install
 script:
+  - chmod +x mvnw
   - ./mvnw clean test
   - yarn test
   - ./mvnw package -Pprod -DskipTests

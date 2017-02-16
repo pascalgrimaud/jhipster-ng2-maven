@@ -13,6 +13,7 @@ stages:
 
 before_script:
     - export MAVEN_USER_HOME=`pwd`/.maven
+    - chmod +x mvnw
     - ./mvnw com.github.eirslett:frontend-maven-plugin:install-node-and-yarn -DnodeVersion=v6.9.5 -DyarnVersion=v0.20.3
     - ./mvnw com.github.eirslett:frontend-maven-plugin:yarn
 

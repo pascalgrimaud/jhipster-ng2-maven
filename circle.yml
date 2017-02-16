@@ -19,6 +19,7 @@ dependencies:
         - yarn install
 test:
     override:
+        - chmod +x mvnw
         - ./mvnw clean test
         - yarn test
         - ./mvnw package -Pprod -DskipTests
