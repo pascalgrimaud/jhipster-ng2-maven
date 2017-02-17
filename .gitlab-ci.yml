@@ -40,7 +40,9 @@ gatling-test:
     script:
         - ./mvnw gatling:execute -Dmaven.repo.local=$MAVEN_USER_HOME
     before_script:
-        - ./mvnw com.github.eirslett:frontend-maven-plugin:install-node-and-yarn -DnodeVersion=v6.9.4 -DyarnVersion=v0.18.1
+        - export MAVEN_USER_HOME=`pwd`/.maven
+        - chmod +x mvnw
+        - ./mvnw com.github.eirslett:frontend-maven-plugin:install-node-and-yarn -DnodeVersion=v6.9.5 -DyarnVersion=v0.20.3
         - ./mvnw com.github.eirslett:frontend-maven-plugin:yarn
         - ./mvnw &
     artifacts:
