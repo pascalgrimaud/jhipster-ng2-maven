@@ -4,13 +4,11 @@ cache:
     key: "$CI_BUILD_REF_NAME"
     paths:
         - node_modules
-        - .m2
+        - .maven
 stages:
     - build
     - test
     - package
-    - release
-    - deploy
 
 before_script:
     - export MAVEN_USER_HOME=`pwd`/.maven
@@ -33,7 +31,9 @@ maven-front-test:
     stage: test
     script:
         - ./mvnw com.github.eirslett:frontend-maven-plugin:yarn -Dfrontend.yarn.arguments=test
-
+    artifacts:
+        paths:
+            - target/test-results/karma/*
 gatling-test:
     stage: test
     allow_failure: true
