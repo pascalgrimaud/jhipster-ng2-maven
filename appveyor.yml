@@ -11,10 +11,10 @@ install:
   - yarn install
   - echo %PATH%
   - java -version
-  - mvnw.bat --version
+  - mvnw.cmd --version
 
 test_script:
-  - mvnw.bat package -Pprod
+  - mvnw.cmd package -Pprod
 
 cache:
  - node_modules
