@@ -4,6 +4,7 @@ import io.github.pascalgrimaud.domain.Authority;
 import io.github.pascalgrimaud.domain.User;
 import io.github.pascalgrimaud.repository.AuthorityRepository;
 import io.github.pascalgrimaud.repository.PersistentTokenRepository;
+import io.github.pascalgrimaud.config.Constants;
 import io.github.pascalgrimaud.repository.UserRepository;
 import io.github.pascalgrimaud.security.AuthoritiesConstants;
 import io.github.pascalgrimaud.security.SecurityUtils;
@@ -195,7 +196,7 @@ public class UserService {
 
     @Transactional(readOnly = true)    
     public Page<UserDTO> getAllManagedUsers(Pageable pageable) {
-        return userRepository.findAll(pageable).map(UserDTO::new);
+        return userRepository.findAllByLoginNot(pageable, Constants.ANONYMOUS_USER).map(UserDTO::new);
     }
 
     @Transactional(readOnly = true)
