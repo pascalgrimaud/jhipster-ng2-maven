@@ -4,7 +4,7 @@ machine:
     java:
         version: oraclejdk8
     node:
-        version: 6.9.5
+        version: 6.10.0
 dependencies:
     cache_directories:
         - node
@@ -22,4 +22,4 @@ test:
         - chmod +x mvnw
         - ./mvnw clean test
         - yarn test
-        - ./mvnw package -Pprod -DskipTests
+        - ./mvnw com.heroku.sdk:heroku-maven-plugin:1.1.1:deploy -DskipTests -Pprod -Dheroku.appName=jhgrad
