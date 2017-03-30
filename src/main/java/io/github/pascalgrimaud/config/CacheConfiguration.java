@@ -21,15 +21,15 @@ import org.springframework.context.annotation.*;
 @AutoConfigureBefore(value = { WebConfigurer.class, DatabaseConfiguration.class })
 public class CacheConfiguration {
 
-    private final javax.cache.configuration.Configuration<Object, Object> cacheConfiguration;
+    private final javax.cache.configuration.Configuration<Object, Object> jcacheConfiguration;
 
     public CacheConfiguration(JHipsterProperties jHipsterProperties) {
         JHipsterProperties.Cache.Ehcache ehcache =
             jHipsterProperties.getCache().getEhcache();
 
-        cacheConfiguration = Eh107Configuration.fromEhcacheCacheConfiguration(
+        jcacheConfiguration = Eh107Configuration.fromEhcacheCacheConfiguration(
             CacheConfigurationBuilder.newCacheConfigurationBuilder(Object.class, Object.class,
-                ResourcePoolsBuilder.newResourcePoolsBuilder().heap(ehcache.getMaxEntries()))
+                ResourcePoolsBuilder.heap(ehcache.getMaxEntries()))
                 .withExpiry(Expirations.timeToLiveExpiration(Duration.of(ehcache.getTimeToLiveSeconds(), TimeUnit.SECONDS)))
                 .build());
     }
@@ -37,11 +37,11 @@ public class CacheConfiguration {
     @Bean
     public JCacheManagerCustomizer cacheManagerCustomizer() {
         return cm -> {
-            cm.createCache(io.github.pascalgrimaud.domain.User.class.getName(), cacheConfiguration);
-            cm.createCache(io.github.pascalgrimaud.domain.Authority.class.getName(), cacheConfiguration);
-            cm.createCache(io.github.pascalgrimaud.domain.User.class.getName() + ".authorities", cacheConfiguration);
-            cm.createCache(io.github.pascalgrimaud.domain.PersistentToken.class.getName(), cacheConfiguration);
-            cm.createCache(io.github.pascalgrimaud.domain.User.class.getName() + ".persistentTokens", cacheConfiguration);
+            cm.createCache(io.github.pascalgrimaud.domain.User.class.getName(), jcacheConfiguration);
+            cm.createCache(io.github.pascalgrimaud.domain.Authority.class.getName(), jcacheConfiguration);
+            cm.createCache(io.github.pascalgrimaud.domain.User.class.getName() + ".authorities", jcacheConfiguration);
+            cm.createCache(io.github.pascalgrimaud.domain.PersistentToken.class.getName(), jcacheConfiguration);
+            cm.createCache(io.github.pascalgrimaud.domain.User.class.getName() + ".persistentTokens", jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }
